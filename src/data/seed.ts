@@ -41,6 +41,46 @@ export const SEED_CLIENTS: Client[] = [
     companyEmail: 'ngozi@lagosleisure.ng',
     avatarColor: '#1A6644',
   },
+  {
+    id: 'c6',
+    name: 'Chidi Nwosu',
+    phone: '0814 345 6789',
+    companyName: 'Niger Delta Logistics',
+    companyEmail: 'chidi@ndlogistics.ng',
+    avatarColor: '#1A3352',
+  },
+  {
+    id: 'c7',
+    name: 'Funke Balogun',
+    phone: '0902 456 7890',
+    companyName: null,
+    companyEmail: null,
+    avatarColor: '#6C3483',
+  },
+  {
+    id: 'c8',
+    name: 'Segun Martins',
+    phone: '0806 678 9012',
+    companyName: 'Martins Fisheries Ltd',
+    companyEmail: 'accounts@martinsfisheries.ng',
+    avatarColor: '#145A32',
+  },
+  {
+    id: 'c9',
+    name: 'Amaka Eze',
+    phone: '0703 890 1234',
+    companyName: 'Eze Marine Charters',
+    companyEmail: 'amaka@ezemarine.ng',
+    avatarColor: '#784212',
+  },
+  {
+    id: 'c10',
+    name: 'Biodun Adeyemi',
+    phone: '0815 901 2345',
+    companyName: 'Adeyemi Shipping Co.',
+    companyEmail: 'ops@adeyemishipping.ng',
+    avatarColor: '#1A5276',
+  },
 ];
 
 export const SEED_INVENTORY: InventoryItem[] = [
@@ -291,6 +331,158 @@ export const SEED_INVOICES: Invoice[] = [
         quantityX100: 300,
         unitPriceKobo: 3000000,
       },
+    ],
+    payments: [],
+  },
+  // Chidi Nwosu — fully paid overhaul
+  {
+    id: 'v6',
+    clientId: 'c6',
+    invoiceNumber: 'INV-2026-006',
+    date: 'Mar 5',
+    notes: 'Crew transfer vessel — full engine overhaul',
+    lineItems: [
+      { id: 'l13', invoiceId: 'v6', inventoryItemId: 'i6', itemType: 'part',    description: 'Caterpillar injector seal kit',      quantityX100: 200, unitPriceKobo: 3800000 },
+      { id: 'l14', invoiceId: 'v6', inventoryItemId: 'i3', itemType: 'part',    description: 'Engine oil 10W-40 (4L)',             quantityX100: 800, unitPriceKobo: 850000  },
+      { id: 'l15', invoiceId: 'v6', inventoryItemId: null, itemType: 'labour',  description: 'Labour — full engine overhaul',      quantityX100: 100, unitPriceKobo: 9500000 },
+      { id: 'l16', invoiceId: 'v6', inventoryItemId: null, itemType: 'service', description: 'Pressure test and diagnostics',      quantityX100: 100, unitPriceKobo: 3000000 },
+    ],
+    payments: [
+      { id: 'p4', invoiceId: 'v6', paymentType: 'credit', amountKobo: 10000000, method: 'bank_transfer', providerReference: 'TRF20260305004', internalReference: 'PAY-004', recordedAt: 'Mar 5'  },
+      { id: 'p5', invoiceId: 'v6', paymentType: 'credit', amountKobo: 10000000, method: 'bank_transfer', providerReference: 'TRF20260312005', internalReference: 'PAY-005', recordedAt: 'Mar 12' },
+      { id: 'p6', invoiceId: 'v6', paymentType: 'credit', amountKobo: 6400000,  method: 'bank_transfer', providerReference: 'TRF20260319006', internalReference: 'PAY-006', recordedAt: 'Mar 19' },
+    ],
+  },
+  // Chidi Nwosu — large unpaid
+  {
+    id: 'v7',
+    clientId: 'c6',
+    invoiceNumber: 'INV-2026-007',
+    date: 'Apr 3',
+    notes: 'Supply vessel Kogi — propeller and hull work',
+    lineItems: [
+      { id: 'l17', invoiceId: 'v7', inventoryItemId: 'i8', itemType: 'part',    description: 'Propeller shaft seal Volvo',         quantityX100: 200, unitPriceKobo: 2750000 },
+      { id: 'l18', invoiceId: 'v7', inventoryItemId: 'i4', itemType: 'part',    description: 'Zinc anode plate 150mm',             quantityX100: 600, unitPriceKobo: 650000  },
+      { id: 'l19', invoiceId: 'v7', inventoryItemId: null, itemType: 'service', description: 'Hull inspection and antifoul prep',   quantityX100: 100, unitPriceKobo: 6500000 },
+      { id: 'l20', invoiceId: 'v7', inventoryItemId: null, itemType: 'labour',  description: 'Labour — prop and seal replacement',  quantityX100: 100, unitPriceKobo: 4000000 },
+    ],
+    payments: [],
+  },
+  // Funke Balogun — partial with reversal
+  {
+    id: 'v8',
+    clientId: 'c7',
+    invoiceNumber: 'INV-2026-008',
+    date: 'Apr 7',
+    notes: 'Private speedboat — annual service',
+    lineItems: [
+      { id: 'l21', invoiceId: 'v8', inventoryItemId: 'i1', itemType: 'part',   description: 'Yamaha impeller 63V-44352',          quantityX100: 100, unitPriceKobo: 1500000 },
+      { id: 'l22', invoiceId: 'v8', inventoryItemId: 'i7', itemType: 'part',   description: 'Spark plug NGK BR8HS ×4',            quantityX100: 200, unitPriceKobo: 320000  },
+      { id: 'l23', invoiceId: 'v8', inventoryItemId: 'i3', itemType: 'part',   description: 'Engine oil 10W-40 (4L)',             quantityX100: 200, unitPriceKobo: 850000  },
+      { id: 'l24', invoiceId: 'v8', inventoryItemId: null, itemType: 'labour', description: 'Labour — annual service',            quantityX100: 100, unitPriceKobo: 2500000 },
+    ],
+    payments: [
+      { id: 'p7', invoiceId: 'v8', paymentType: 'credit', amountKobo: 3000000, method: 'pos',           providerReference: 'POS20260407007', internalReference: 'PAY-007', recordedAt: 'Apr 7' },
+      { id: 'p8', invoiceId: 'v8', paymentType: 'debit',  amountKobo: 3000000, method: 'bank_transfer', providerReference: 'REV20260408008', internalReference: 'PAY-008', recordedAt: 'Apr 8' },
+      { id: 'p9', invoiceId: 'v8', paymentType: 'credit', amountKobo: 3000000, method: 'bank_transfer', providerReference: 'TRF20260409009', internalReference: 'PAY-009', recordedAt: 'Apr 9' },
+    ],
+  },
+  // Segun Martins — paid quarterly service
+  {
+    id: 'v9',
+    clientId: 'c8',
+    invoiceNumber: 'INV-2026-009',
+    date: 'Feb 14',
+    notes: 'Fishing trawler MV Blessing — quarterly service',
+    lineItems: [
+      { id: 'l25', invoiceId: 'v9', inventoryItemId: 'i2', itemType: 'part',   description: 'Mercury water pump kit',             quantityX100: 100, unitPriceKobo: 2200000 },
+      { id: 'l26', invoiceId: 'v9', inventoryItemId: 'i5', itemType: 'part',   description: 'Suzuki fuel filter DF150',           quantityX100: 300, unitPriceKobo: 480000  },
+      { id: 'l27', invoiceId: 'v9', inventoryItemId: null, itemType: 'labour', description: 'Labour — quarterly service',         quantityX100: 100, unitPriceKobo: 3500000 },
+    ],
+    payments: [
+      { id: 'p10', invoiceId: 'v9', paymentType: 'credit', amountKobo: 7140000, method: 'cash', providerReference: null, internalReference: 'PAY-010', recordedAt: 'Feb 14' },
+    ],
+  },
+  // Segun Martins — partial cooling system
+  {
+    id: 'v10',
+    clientId: 'c8',
+    invoiceNumber: 'INV-2026-010',
+    date: 'Mar 22',
+    notes: 'MV Goodness — engine mounts and cooling system',
+    lineItems: [
+      { id: 'l28', invoiceId: 'v10', inventoryItemId: 'i3', itemType: 'part',    description: 'Engine oil 10W-40 (4L)',            quantityX100: 600, unitPriceKobo: 850000  },
+      { id: 'l29', invoiceId: 'v10', inventoryItemId: 'i4', itemType: 'part',    description: 'Zinc anode plate 150mm',            quantityX100: 400, unitPriceKobo: 650000  },
+      { id: 'l30', invoiceId: 'v10', inventoryItemId: null, itemType: 'service', description: 'Cooling system flush and refill',   quantityX100: 100, unitPriceKobo: 4200000 },
+      { id: 'l31', invoiceId: 'v10', inventoryItemId: null, itemType: 'labour',  description: 'Labour — mounts and cooling',       quantityX100: 100, unitPriceKobo: 3800000 },
+    ],
+    payments: [
+      { id: 'p11', invoiceId: 'v10', paymentType: 'credit', amountKobo: 8000000, method: 'bank_transfer', providerReference: 'TRF20260322011', internalReference: 'PAY-011', recordedAt: 'Mar 22' },
+    ],
+  },
+  // Segun Martins — emergency callout, unpaid
+  {
+    id: 'v11',
+    clientId: 'c8',
+    invoiceNumber: 'INV-2026-011',
+    date: 'Apr 21',
+    notes: 'MV Blessing — emergency callout, electrical fault',
+    lineItems: [
+      { id: 'l32', invoiceId: 'v11', inventoryItemId: null, itemType: 'service', description: 'Emergency callout — electrical fault', quantityX100: 100, unitPriceKobo: 5000000 },
+      { id: 'l33', invoiceId: 'v11', inventoryItemId: null, itemType: 'labour',  description: 'Labour — electrical diagnostic',       quantityX100: 150, unitPriceKobo: 2500000 },
+    ],
+    payments: [],
+  },
+  // Amaka Eze — large charter fleet service, fully paid
+  {
+    id: 'v12',
+    clientId: 'c9',
+    invoiceNumber: 'INV-2026-012',
+    date: 'Jan 20',
+    notes: 'Charter fleet — 3 vessels, pre-season full service',
+    lineItems: [
+      { id: 'l34', invoiceId: 'v12', inventoryItemId: 'i1', itemType: 'part',    description: 'Yamaha impeller 63V-44352',          quantityX100: 600,  unitPriceKobo: 1500000  },
+      { id: 'l35', invoiceId: 'v12', inventoryItemId: 'i3', itemType: 'part',    description: 'Engine oil 10W-40 (4L)',             quantityX100: 1200, unitPriceKobo: 850000   },
+      { id: 'l36', invoiceId: 'v12', inventoryItemId: 'i7', itemType: 'part',    description: 'Spark plug NGK BR8HS ×4',            quantityX100: 300,  unitPriceKobo: 320000   },
+      { id: 'l37', invoiceId: 'v12', inventoryItemId: 'i4', itemType: 'part',    description: 'Zinc anode plate 150mm',             quantityX100: 900,  unitPriceKobo: 650000   },
+      { id: 'l38', invoiceId: 'v12', inventoryItemId: null, itemType: 'service', description: 'Full pre-season service ×3 vessels', quantityX100: 100,  unitPriceKobo: 18000000 },
+      { id: 'l39', invoiceId: 'v12', inventoryItemId: null, itemType: 'labour',  description: 'Labour — 3-vessel service team',     quantityX100: 100,  unitPriceKobo: 12000000 },
+    ],
+    payments: [
+      { id: 'p12', invoiceId: 'v12', paymentType: 'credit', amountKobo: 25000000, method: 'bank_transfer', providerReference: 'TRF20260120012', internalReference: 'PAY-012', recordedAt: 'Jan 20' },
+      { id: 'p13', invoiceId: 'v12', paymentType: 'credit', amountKobo: 25000000, method: 'bank_transfer', providerReference: 'TRF20260127013', internalReference: 'PAY-013', recordedAt: 'Jan 27' },
+      { id: 'p14', invoiceId: 'v12', paymentType: 'credit', amountKobo: 9960000,  method: 'bank_transfer', providerReference: 'TRF20260203014', internalReference: 'PAY-014', recordedAt: 'Feb 3'  },
+    ],
+  },
+  // Biodun Adeyemi — partial dry dock
+  {
+    id: 'v13',
+    clientId: 'c10',
+    invoiceNumber: 'INV-2026-013',
+    date: 'Mar 30',
+    notes: 'Cargo barge Delta Star — dry dock service',
+    lineItems: [
+      { id: 'l40', invoiceId: 'v13', inventoryItemId: 'i8', itemType: 'part',    description: 'Propeller shaft seal Volvo',          quantityX100: 400, unitPriceKobo: 2750000  },
+      { id: 'l41', invoiceId: 'v13', inventoryItemId: 'i6', itemType: 'part',    description: 'Caterpillar injector seal kit',        quantityX100: 300, unitPriceKobo: 3800000  },
+      { id: 'l42', invoiceId: 'v13', inventoryItemId: null, itemType: 'service', description: 'Dry dock inspection and report',       quantityX100: 100, unitPriceKobo: 15000000 },
+      { id: 'l43', invoiceId: 'v13', inventoryItemId: null, itemType: 'labour',  description: 'Labour — dry dock full crew 5 days',   quantityX100: 100, unitPriceKobo: 18000000 },
+    ],
+    payments: [
+      { id: 'p15', invoiceId: 'v13', paymentType: 'credit', amountKobo: 30000000, method: 'bank_transfer', providerReference: 'TRF20260330015', internalReference: 'PAY-015', recordedAt: 'Mar 30' },
+    ],
+  },
+  // Biodun Adeyemi — large unpaid procurement
+  {
+    id: 'v14',
+    clientId: 'c10',
+    invoiceNumber: 'INV-2026-014',
+    date: 'Apr 24',
+    notes: 'Barge fleet — 2 vessels awaiting parts from import',
+    lineItems: [
+      { id: 'l44', invoiceId: 'v14', inventoryItemId: 'i6', itemType: 'part',    description: 'Caterpillar injector seal kit ×2',   quantityX100: 200, unitPriceKobo: 3800000 },
+      { id: 'l45', invoiceId: 'v14', inventoryItemId: 'i8', itemType: 'part',    description: 'Propeller shaft seal Volvo ×2',      quantityX100: 200, unitPriceKobo: 2750000 },
+      { id: 'l46', invoiceId: 'v14', inventoryItemId: null, itemType: 'service', description: 'Import procurement and logistics',    quantityX100: 100, unitPriceKobo: 8500000 },
+      { id: 'l47', invoiceId: 'v14', inventoryItemId: null, itemType: 'labour',  description: 'Labour — installation (on arrival)',  quantityX100: 100, unitPriceKobo: 6000000 },
     ],
     payments: [],
   },
