@@ -38,11 +38,8 @@ export function Dashboard() {
             Total outstanding
           </p>
           <p
-            className="font-syne font-extrabold text-white tabular-nums leading-none mb-3"
-            style={{
-              fontSize: 'clamp(32px, 8vw, 44px)',
-              fontVariantNumeric: 'tabular-nums',
-            }}
+            className="font-syne font-extrabold text-white leading-none mb-3 text-[32px] md:text-[40px]"
+            style={{ fontVariantNumeric: 'tabular-nums' }}
           >
             {formatKobo(totalOutstanding)}
           </p>
