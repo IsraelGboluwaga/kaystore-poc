@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/useApp';
 import { computeInvoice } from '../utils/compute';
@@ -8,9 +9,42 @@ import { AmountDisplay } from '../components/AmountDisplay';
 import { SectionHeader } from '../components/SectionHeader';
 import { Topbar } from '../components/layout/Topbar';
 
+const PERIOD_OPTIONS = [
+  { label: 'This month', months: 1 },
+  { label: '3 months',   months: 3 },
+  { label: '6 months',   months: 6 },
+  { label: '9 months',   months: 9 },
+  { label: '12 months',  months: 12 },
+  { label: '24 months',  months: 24 },
+] as const;
+
+// Hardcoded for POC: current date is April 2026
+const CURRENT_MONTH_IDX = 3; // 0-based
+const CURRENT_YEAR = 2026;
+
+const MONTH_ABBR: Record<string, number> = {
+  Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4,  Jun: 5,
+  Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+};
+
+function isWithinPeriod(recordedAt: string, months: number): boolean {
+  const abbr = recordedAt.split(' ')[0];
+  const monthIdx = MONTH_ABBR[abbr];
+  if (monthIdx === undefined) return true;
+  // Assume same year for all POC seed data
+  const currentTotal = CURRENT_YEAR * 12 + CURRENT_MONTH_IDX;
+  const paymentTotal = CURRENT_YEAR * 12 + monthIdx;
+  return months === 1
+    ? paymentTotal === currentTotal
+    : currentTotal - paymentTotal < months;
+}
+
 export function Dashboard() {
   const { state } = useApp();
   const navigate = useNavigate();
+  const [selectedPeriodIdx, setSelectedPeriodIdx] = useState(0);
+
+  const selectedPeriod = PERIOD_OPTIONS[selectedPeriodIdx];
 
   const computed = state.invoices.map((inv) => ({
     invoice: inv,
@@ -22,11 +56,22 @@ export function Dashboard() {
     0
   );
 
-  const countOpen = computed.filter((c) => c.status === 'open').length;
-  const countPartial = computed.filter((c) => c.status === 'partial').length;
-  const countPaid = computed.filter((c) => c.status === 'paid').length;
+  const collectedKobo = state.invoices.reduce((sum, inv) => {
+    return inv.payments.reduce((s, p) => {
+      if (!isWithinPeriod(p.recordedAt, selectedPeriod.months)) return s;
+      return p.paymentType === 'credit' ? s + p.amountKobo : s - p.amountKobo;
+    }, sum);
+  }, 0);
+
+  const countUnpaid = computed.filter(
+    (c) => c.status === 'open' || c.status === 'partial'
+  ).length;
 
   const recentInvoices = [...computed].reverse();
+
+  const periodSubLabel = selectedPeriod.months === 1
+    ? 'this month'
+    : selectedPeriod.label.toLowerCase();
 
   return (
     <>
@@ -38,44 +83,75 @@ export function Dashboard() {
             Total outstanding
           </p>
           <p
-            className="font-syne font-extrabold text-white leading-none mb-3 text-[32px] md:text-[40px]"
+            className="font-syne font-extrabold text-white leading-none text-[32px] md:text-[40px]"
             style={{ fontVariantNumeric: 'tabular-nums' }}
           >
             {formatKobo(totalOutstanding)}
           </p>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-[12px] text-white/45 font-dm">
-              <span className="w-2 h-2 rounded-full bg-amber" />
-              {countOpen} unpaid
-            </span>
-            <span className="flex items-center gap-1.5 text-[12px] text-white/45 font-dm">
-              <span className="w-2 h-2 rounded-full bg-blue" />
-              {countPartial} partial
-            </span>
-            <span className="flex items-center gap-1.5 text-[12px] text-white/45 font-dm">
-              <span className="w-2 h-2 rounded-full bg-green" />
-              {countPaid} paid
-            </span>
-          </div>
         </div>
 
-        {/* Stat row */}
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { label: 'Clients', value: state.clients.length, amber: false },
-            { label: 'Invoices', value: state.invoices.length, amber: false },
-            { label: 'Unpaid', value: countOpen + countPartial, amber: true },
-          ].map(({ label, value, amber }) => (
-            <div key={label} className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
-              <span
-                className={`font-syne font-extrabold text-[26px] leading-none ${amber ? 'text-amber' : 'text-tx'}`}
-                style={{ fontVariantNumeric: 'tabular-nums' }}
-              >
-                {value}
-              </span>
-              <span className="text-[11px] text-tx-2 font-dm">{label}</span>
-            </div>
+        {/* Period filter pills */}
+        <div className="flex gap-2 overflow-x-auto pb-0.5 scrollbar-none">
+          {PERIOD_OPTIONS.map((opt, idx) => (
+            <button
+              key={opt.label}
+              onClick={() => setSelectedPeriodIdx(idx)}
+              className={`shrink-0 h-9 px-4 rounded-input text-[13px] font-semibold font-dm transition-colors duration-120
+                ${idx === selectedPeriodIdx
+                  ? 'bg-amber-bg text-amber border border-amber-border'
+                  : 'bg-surface-2 text-tx-2 border border-transparent hover:border-border'
+                }`}
+            >
+              {opt.label}
+            </button>
           ))}
+        </div>
+
+        {/* Stat grid — 2 cols mobile, 4 cols desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {/* Collected */}
+          <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
+            <span
+              className="font-syne font-extrabold text-[22px] leading-none text-green truncate"
+              style={{ fontVariantNumeric: 'tabular-nums' }}
+            >
+              {formatKobo(Math.max(0, collectedKobo))}
+            </span>
+            <span className="text-[11px] text-tx-2 font-dm">Collected · {periodSubLabel}</span>
+          </div>
+
+          {/* Outstanding */}
+          <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
+            <span
+              className="font-syne font-extrabold text-[22px] leading-none text-amber truncate"
+              style={{ fontVariantNumeric: 'tabular-nums' }}
+            >
+              {formatKobo(totalOutstanding)}
+            </span>
+            <span className="text-[11px] text-tx-2 font-dm">Outstanding</span>
+          </div>
+
+          {/* Invoices */}
+          <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
+            <span
+              className="font-syne font-extrabold text-[26px] leading-none text-tx"
+              style={{ fontVariantNumeric: 'tabular-nums' }}
+            >
+              {state.invoices.length}
+            </span>
+            <span className="text-[11px] text-tx-2 font-dm">Invoices</span>
+          </div>
+
+          {/* Unpaid */}
+          <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
+            <span
+              className="font-syne font-extrabold text-[26px] leading-none text-amber"
+              style={{ fontVariantNumeric: 'tabular-nums' }}
+            >
+              {countUnpaid}
+            </span>
+            <span className="text-[11px] text-tx-2 font-dm">Unpaid</span>
+          </div>
         </div>
 
         {/* Recent invoices */}
