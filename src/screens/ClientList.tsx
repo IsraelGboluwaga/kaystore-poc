@@ -42,7 +42,7 @@ export function ClientList() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search clients…"
-          className="w-full h-12 px-4 rounded-input bg-surface text-tx text-[15px] font-dm border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors shadow-card"
+          className="w-full h-12 px-4 rounded-input bg-surface text-tx text-[15px] font-sans border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors shadow-card"
         />
 
         <div className="bg-surface rounded-card shadow-card overflow-hidden">
@@ -57,8 +57,8 @@ export function ClientList() {
               >
                 <Avatar name={client.name} color={client.avatarColor} size={42} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-[15px] font-semibold text-tx font-dm truncate">{client.name}</p>
-                  <p className="text-[12px] text-tx-2 font-dm truncate">
+                  <p className="text-[15px] font-semibold text-tx font-sans truncate">{client.name}</p>
+                  <p className="text-[12px] text-tx-2 font-sans truncate">
                     {client.companyName ?? 'Individual'}
                   </p>
                 </div>
@@ -67,7 +67,7 @@ export function ClientList() {
                     kobo={outstanding}
                     className="font-bold text-[15px] text-amber"
                   />
-                  <span className="text-[12px] text-tx-3 font-dm">
+                  <span className="text-[12px] text-tx-3 font-sans">
                     {count} invoice{count !== 1 ? 's' : ''}
                   </span>
                 </div>
@@ -75,7 +75,7 @@ export function ClientList() {
             );
           })}
           {filtered.length === 0 && (
-            <p className="px-4 py-6 text-[14px] text-tx-2 font-dm text-center">
+            <p className="px-4 py-6 text-[14px] text-tx-2 font-sans text-center">
               No clients match "{search}"
             </p>
           )}

@@ -62,13 +62,13 @@ export function Sidebar() {
         <div className="w-[34px] h-[34px] rounded-input bg-amber flex items-center justify-center text-white shrink-0">
           <AnchorIcon />
         </div>
-        <span className="font-syne font-bold text-white text-[17px] leading-tight">
+        <span className="font-display font-bold text-white text-[17px] leading-tight">
           Marine Depot
         </span>
       </div>
 
       {/* Nav section label */}
-      <p className="px-5 mb-2 text-[11px] font-semibold uppercase tracking-[0.6px] text-white/40 font-dm">
+      <p className="px-5 mb-2 text-[11px] font-semibold uppercase tracking-[0.6px] text-white/40 font-sans">
         Navigation
       </p>
 
@@ -79,7 +79,7 @@ export function Sidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-[11px] rounded-input text-[14px] font-medium font-dm transition-colors duration-120 relative
+              `flex items-center gap-3 px-3 py-[11px] rounded-input text-[14px] font-medium font-sans transition-colors duration-120 relative
               ${isActive
                 ? 'bg-white/10 text-white border-l-[3px] border-amber pl-[9px]'
                 : 'text-white/60 hover:text-white hover:bg-white/5'
@@ -97,8 +97,8 @@ export function Sidebar() {
 
       {/* Bottom meta */}
       <div className="px-5 py-5 border-t border-white/10">
-        <p className="text-[13px] font-semibold text-white font-dm">Marine Supply Depot</p>
-        <p className="text-[12px] text-white/40 font-dm mt-0.5">Lagos, Nigeria</p>
+        <p className="text-[13px] font-semibold text-white font-sans">Marine Supply Depot</p>
+        <p className="text-[12px] text-white/40 font-sans mt-0.5">Lagos, Nigeria</p>
       </div>
     </aside>
   );

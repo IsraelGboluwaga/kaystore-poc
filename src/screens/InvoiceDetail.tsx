@@ -20,7 +20,7 @@ export function InvoiceDetail() {
   if (!invoice) {
     return (
       <div className="flex items-center justify-center flex-1 p-8">
-        <p className="text-tx-2 font-dm">Invoice not found.</p>
+        <p className="text-tx-2 font-sans">Invoice not found.</p>
       </div>
     );
   }
@@ -47,24 +47,24 @@ export function InvoiceDetail() {
 
       {/* Zone A — Navy header */}
       <div className="bg-navy w-full px-5 pb-6 pt-4 md:pt-8">
-        <p className="font-syne font-extrabold text-white text-[22px] leading-tight truncate">
+        <p className="font-display font-extrabold text-white text-[22px] leading-tight truncate">
           {client?.name ?? 'Unknown'}
         </p>
         {client?.companyName && (
-          <p className="text-[12px] text-white/45 font-dm mt-0.5">{client.companyName}</p>
+          <p className="text-[12px] text-white/45 font-sans mt-0.5">{client.companyName}</p>
         )}
 
-        <p className="text-[11px] font-semibold uppercase tracking-[0.6px] text-white/40 font-dm mt-4 mb-1">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.6px] text-white/40 font-sans mt-4 mb-1">
           Outstanding balance
         </p>
 
         {balanceKobo <= 0 ? (
-          <p className="font-syne font-bold text-green text-[28px] leading-none tabular-nums">
+          <p className="font-display font-bold text-green text-[28px] leading-none tabular-nums">
             Settled
           </p>
         ) : (
           <p
-            className="font-syne font-extrabold text-white leading-none tabular-nums"
+            className="font-display font-extrabold text-white leading-none tabular-nums"
             style={{
               fontSize: 'clamp(32px, 9vw, 44px)',
               fontVariantNumeric: 'tabular-nums',
@@ -75,7 +75,7 @@ export function InvoiceDetail() {
         )}
 
         <div className="flex items-center justify-between mt-3">
-          <p className="text-[12px] text-white/40 font-dm">
+          <p className="text-[12px] text-white/40 font-sans">
             {invoice.invoiceNumber} · {invoice.date}
           </p>
           <Badge status={status} />
@@ -87,7 +87,7 @@ export function InvoiceDetail() {
         {/* Notes */}
         {invoice.notes && (
           <div className="bg-surface rounded-card shadow-card px-3 py-3">
-            <p className="text-[13px] text-tx-2 font-dm">{invoice.notes}</p>
+            <p className="text-[13px] text-tx-2 font-sans">{invoice.notes}</p>
           </div>
         )}
 
@@ -103,8 +103,8 @@ export function InvoiceDetail() {
             >
               <TypeDot type={li.itemType} />
               <div className="flex-1 min-w-0">
-                <p className="text-[14px] font-medium text-tx font-dm truncate">{li.description}</p>
-                <p className="text-[12px] text-tx-2 font-dm capitalize">
+                <p className="text-[14px] font-medium text-tx font-sans truncate">{li.description}</p>
+                <p className="text-[12px] text-tx-2 font-sans capitalize">
                   {li.itemType} · qty {formatQty(li.quantityX100)}
                 </p>
                 <span
@@ -118,7 +118,7 @@ export function InvoiceDetail() {
                 </span>
               </div>
               <span
-                className="font-syne font-bold text-[14px] text-tx tabular-nums shrink-0 mt-1"
+                className="font-display font-bold text-[14px] text-tx tabular-nums shrink-0 mt-1"
                 style={{ fontVariantNumeric: 'tabular-nums' }}
               >
                 {formatKobo((li.quantityX100 / 100) * li.unitPriceKobo)}
@@ -129,7 +129,7 @@ export function InvoiceDetail() {
           {/* Add item row */}
           <button
             onClick={() => setShowAddItem(true)}
-            className="w-full flex items-center gap-2 px-4 py-3 min-h-[48px] bg-surface-2 text-[12px] font-semibold text-tx-2 font-dm hover:bg-border transition-colors duration-120 active:bg-border border-t border-border"
+            className="w-full flex items-center gap-2 px-4 py-3 min-h-[48px] bg-surface-2 text-[12px] font-semibold text-tx-2 font-sans hover:bg-border transition-colors duration-120 active:bg-border border-t border-border"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
@@ -141,22 +141,22 @@ export function InvoiceDetail() {
         {/* Totals block */}
         <div className="bg-surface-2 rounded-input p-[14px] flex flex-col gap-2">
           <div className="flex justify-between">
-            <span className="text-[14px] text-tx-2 font-dm">Subtotal</span>
-            <span className="text-[14px] text-tx font-dm tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
+            <span className="text-[14px] text-tx-2 font-sans">Subtotal</span>
+            <span className="text-[14px] text-tx font-sans tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {formatKobo(totalKobo)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[14px] text-tx-2 font-dm">Paid</span>
-            <span className="text-[14px] text-green font-dm tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
+            <span className="text-[14px] text-tx-2 font-sans">Paid</span>
+            <span className="text-[14px] text-green font-sans tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {formatKobo(paidKobo)}
             </span>
           </div>
           <div className="h-px bg-border my-1" />
           <div className="flex justify-between items-center">
-            <span className="text-[14px] font-semibold text-tx font-dm">Balance due</span>
+            <span className="text-[14px] font-semibold text-tx font-sans">Balance due</span>
             <span
-              className={`font-syne font-bold text-[17px] tabular-nums ${balanceKobo <= 0 ? 'text-green' : 'text-amber'}`}
+              className={`font-display font-bold text-[17px] tabular-nums ${balanceKobo <= 0 ? 'text-green' : 'text-amber'}`}
               style={{ fontVariantNumeric: 'tabular-nums' }}
             >
               {formatKobo(balanceKobo)}
@@ -201,10 +201,10 @@ export function InvoiceDetail() {
 
                     {/* Middle */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-[14px] font-medium text-tx font-dm">
+                      <p className="text-[14px] font-medium text-tx font-sans">
                         {isCredit ? 'Payment received' : 'Reversal'}
                       </p>
-                      <p className="text-[12px] text-tx-2 font-dm truncate">
+                      <p className="text-[12px] text-tx-2 font-sans truncate">
                         {methodLabel} · {payment.internalReference}
                         {shortRef ? ` · …${shortRef}` : ''} · {payment.recordedAt}
                       </p>
@@ -212,7 +212,7 @@ export function InvoiceDetail() {
 
                     {/* Amount */}
                     <span
-                      className={`font-syne font-bold text-[15px] tabular-nums shrink-0 ${isCredit ? 'text-green' : 'text-red-600'}`}
+                      className={`font-display font-bold text-[15px] tabular-nums shrink-0 ${isCredit ? 'text-green' : 'text-red-600'}`}
                       style={{ fontVariantNumeric: 'tabular-nums' }}
                     >
                       {isCredit ? '' : '−'}{formatKobo(payment.amountKobo)}
@@ -232,7 +232,7 @@ export function InvoiceDetail() {
         <div className="fixed bottom-0 left-0 right-0 md:left-60 bg-surface border-t border-border px-4 py-3 pb-[calc(12px+env(safe-area-inset-bottom))] z-20">
           <button
             onClick={() => setShowPayment(true)}
-            className="w-full h-14 bg-navy text-white font-syne font-semibold text-[15px] rounded-input active:scale-[0.98] transition-transform duration-100"
+            className="w-full h-14 bg-navy text-white font-display font-semibold text-[15px] rounded-input active:scale-[0.98] transition-transform duration-100"
           >
             Record payment
           </button>

@@ -19,7 +19,7 @@ export function Avatar({ name, color, size }: Props) {
         borderRadius: radius,
         fontSize,
       }}
-      className="flex items-center justify-center font-syne font-bold text-white select-none"
+      className="flex items-center justify-center font-display font-bold text-white select-none"
     >
       {initials(name)}
     </div>

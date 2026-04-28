@@ -22,8 +22,8 @@ export default {
         border: 'rgba(13,43,78,0.09)',
       },
       fontFamily: {
-        syne: ['Syne', 'sans-serif'],
-        dm: ['DM Sans', 'sans-serif'],
+        display: ['"DM Serif Display"', 'serif'],
+        sans: ['"DM Sans"', 'sans-serif'],
       },
       borderRadius: {
         card: '12px',

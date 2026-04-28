@@ -79,11 +79,11 @@ export function Dashboard() {
       <main className="flex-1 p-4 md:p-6 pb-24 md:pb-6 flex flex-col gap-4">
         {/* Hero card */}
         <div className="bg-navy rounded-card p-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.6px] text-amber font-dm mb-2">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.6px] text-amber font-sans mb-2">
             Total outstanding
           </p>
           <p
-            className="font-syne font-extrabold text-white leading-none text-[32px] md:text-[40px]"
+            className="font-display font-extrabold text-white leading-none text-[32px] md:text-[40px]"
             style={{ fontVariantNumeric: 'tabular-nums' }}
           >
             {formatKobo(totalOutstanding)}
@@ -96,7 +96,7 @@ export function Dashboard() {
             <button
               key={opt.label}
               onClick={() => setSelectedPeriodIdx(idx)}
-              className={`shrink-0 h-9 px-4 rounded-input text-[13px] font-semibold font-dm transition-colors duration-120
+              className={`shrink-0 h-9 px-4 rounded-input text-[13px] font-semibold font-sans transition-colors duration-120
                 ${idx === selectedPeriodIdx
                   ? 'bg-amber-bg text-amber border border-amber-border'
                   : 'bg-surface-2 text-tx-2 border border-transparent hover:border-border'
@@ -112,45 +112,45 @@ export function Dashboard() {
           {/* Collected */}
           <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
             <span
-              className="font-syne font-extrabold text-[22px] leading-none text-green truncate"
+              className="font-display font-extrabold text-[22px] leading-none text-green truncate"
               style={{ fontVariantNumeric: 'tabular-nums' }}
             >
               {formatKobo(Math.max(0, collectedKobo))}
             </span>
-            <span className="text-[11px] text-tx-2 font-dm">Collected · {periodSubLabel}</span>
+            <span className="text-[11px] text-tx-2 font-sans">Collected · {periodSubLabel}</span>
           </div>
 
           {/* Outstanding */}
           <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
             <span
-              className="font-syne font-extrabold text-[22px] leading-none text-amber truncate"
+              className="font-display font-extrabold text-[22px] leading-none text-amber truncate"
               style={{ fontVariantNumeric: 'tabular-nums' }}
             >
               {formatKobo(totalOutstanding)}
             </span>
-            <span className="text-[11px] text-tx-2 font-dm">Outstanding</span>
+            <span className="text-[11px] text-tx-2 font-sans">Outstanding</span>
           </div>
 
           {/* Invoices */}
           <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
             <span
-              className="font-syne font-extrabold text-[26px] leading-none text-tx"
+              className="font-display font-extrabold text-[26px] leading-none text-tx"
               style={{ fontVariantNumeric: 'tabular-nums' }}
             >
               {state.invoices.length}
             </span>
-            <span className="text-[11px] text-tx-2 font-dm">Invoices</span>
+            <span className="text-[11px] text-tx-2 font-sans">Invoices</span>
           </div>
 
           {/* Unpaid */}
           <div className="bg-surface rounded-[10px] shadow-card p-4 flex flex-col gap-1">
             <span
-              className="font-syne font-extrabold text-[26px] leading-none text-amber"
+              className="font-display font-extrabold text-[26px] leading-none text-amber"
               style={{ fontVariantNumeric: 'tabular-nums' }}
             >
               {countUnpaid}
             </span>
-            <span className="text-[11px] text-tx-2 font-dm">Unpaid</span>
+            <span className="text-[11px] text-tx-2 font-sans">Unpaid</span>
           </div>
         </div>
 
@@ -173,8 +173,8 @@ export function Dashboard() {
               >
                 <Avatar name={client.name} color={client.avatarColor} size={38} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-[15px] font-semibold text-tx font-dm truncate">{client.name}</p>
-                  <p className="text-[12px] text-tx-2 font-dm">{invoice.invoiceNumber} · {invoice.date}</p>
+                  <p className="text-[15px] font-semibold text-tx font-sans truncate">{client.name}</p>
+                  <p className="text-[12px] text-tx-2 font-sans">{invoice.invoiceNumber} · {invoice.date}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1 shrink-0">
                   <Badge status={status} />

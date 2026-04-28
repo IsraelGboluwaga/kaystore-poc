@@ -99,7 +99,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
       <div className="px-5 py-4 flex flex-col gap-4">
         {/* Description / inventory search */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-dm">
+          <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-sans">
             Description
           </label>
           <input
@@ -111,7 +111,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
               if (description.trim() && suggestions.length > 0) setShowSuggestions(true);
             }}
             placeholder="Type to search inventory…"
-            className="w-full h-12 px-4 rounded-input bg-surface-2 text-tx text-[15px] font-dm border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors"
+            className="w-full h-12 px-4 rounded-input bg-surface-2 text-tx text-[15px] font-sans border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors"
           />
 
           {/* Suggestions */}
@@ -125,10 +125,10 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
                   className="flex items-center justify-between px-3 py-2.5 rounded-input border-[1.5px] border-amber-border bg-amber-bg text-left active:scale-[0.99] transition-transform"
                 >
                   <div>
-                    <p className="text-[13px] font-medium text-tx font-dm">{item.name}</p>
-                    <p className="text-[12px] text-tx-2 font-dm">Stock: {item.stockQuantity}</p>
+                    <p className="text-[13px] font-medium text-tx font-sans">{item.name}</p>
+                    <p className="text-[12px] text-tx-2 font-sans">Stock: {item.stockQuantity}</p>
                   </div>
-                  <span className="font-syne font-bold text-[14px] text-amber tabular-nums">
+                  <span className="font-display font-bold text-[14px] text-amber tabular-nums">
                     {formatKobo(item.unitPriceKobo)}
                   </span>
                 </button>
@@ -139,11 +139,11 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
           {/* Linkage indicator */}
           {description.trim() !== '' && (
             inventoryItemId ? (
-              <p className="text-[11px] font-semibold text-green font-dm">
+              <p className="text-[11px] font-semibold text-green font-sans">
                 ✓ Inventory linked · stock will not decrement in POC
               </p>
             ) : (
-              <p className="text-[11px] font-semibold text-amber font-dm">
+              <p className="text-[11px] font-semibold text-amber font-sans">
                 ⚠ Ad-hoc item · not linked to inventory
               </p>
             )
@@ -152,7 +152,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
 
         {/* Item type */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-dm">
+          <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-sans">
             Type
           </label>
           <div className="flex gap-2 flex-wrap">
@@ -161,7 +161,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
                 key={value}
                 type="button"
                 onClick={() => setItemType(value)}
-                className={`px-4 h-9 rounded-input text-[13px] font-semibold font-dm transition-colors duration-120
+                className={`px-4 h-9 rounded-input text-[13px] font-semibold font-sans transition-colors duration-120
                   ${itemType === value
                     ? 'bg-navy text-white'
                     : 'bg-surface-2 text-tx-2 hover:bg-border'
@@ -176,7 +176,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
         {/* Qty + Price */}
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-dm">
+            <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-sans">
               Qty
             </label>
             <input
@@ -185,11 +185,11 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
               min={0.01}
               step={0.01}
               onChange={(e) => setQty(e.target.value)}
-              className="h-12 px-4 rounded-input bg-surface-2 text-tx text-[15px] font-dm border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors"
+              className="h-12 px-4 rounded-input bg-surface-2 text-tx text-[15px] font-sans border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-dm">
+            <label className="text-[11px] font-semibold uppercase tracking-[0.6px] text-tx-2 font-sans">
               Unit Price (₦)
             </label>
             <input
@@ -199,7 +199,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
               step={0.01}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="0.00"
-              className="h-12 px-4 rounded-input bg-surface-2 text-tx text-[15px] font-dm border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors"
+              className="h-12 px-4 rounded-input bg-surface-2 text-tx text-[15px] font-sans border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors"
             />
           </div>
         </div>
@@ -207,9 +207,9 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
         {/* Line total preview */}
         {lineTotal !== null && (
           <div className="flex items-center justify-between px-4 py-3 rounded-input bg-amber-bg">
-            <span className="text-[13px] font-semibold text-amber font-dm">Line total</span>
+            <span className="text-[13px] font-semibold text-amber font-sans">Line total</span>
             <span
-              className="font-syne font-extrabold text-[19px] text-amber tabular-nums"
+              className="font-display font-extrabold text-[19px] text-amber tabular-nums"
               style={{ fontVariantNumeric: 'tabular-nums' }}
             >
               {formatKobo(lineTotal)}
@@ -222,7 +222,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 h-12 rounded-input border border-border text-tx-2 text-[14px] font-semibold font-dm hover:bg-surface-2 active:scale-[0.98] transition-all duration-100"
+            className="flex-1 h-12 rounded-input border border-border text-tx-2 text-[14px] font-semibold font-sans hover:bg-surface-2 active:scale-[0.98] transition-all duration-100"
           >
             Cancel
           </button>
@@ -230,7 +230,7 @@ export function AddItemSheet({ invoiceId, onClose }: Props) {
             type="button"
             onClick={handleAdd}
             disabled={!canSave}
-            className="flex-1 h-12 rounded-input bg-amber text-white text-[14px] font-semibold font-dm disabled:opacity-40 active:scale-[0.98] transition-all duration-100"
+            className="flex-1 h-12 rounded-input bg-amber text-white text-[14px] font-semibold font-sans disabled:opacity-40 active:scale-[0.98] transition-all duration-100"
           >
             Add item
           </button>

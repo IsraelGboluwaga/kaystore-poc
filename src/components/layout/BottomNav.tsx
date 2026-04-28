@@ -60,7 +60,7 @@ export function BottomNav() {
             {({ isActive }) => (
               <>
                 <Icon />
-                <span className="text-[11px] font-medium font-dm">{label}</span>
+                <span className="text-[11px] font-medium font-sans">{label}</span>
                 {label === 'Invoices' && hasUnpaid && (
                   <span
                     className="absolute top-2 right-[calc(50%-14px)] w-2 h-2 rounded-full bg-amber"

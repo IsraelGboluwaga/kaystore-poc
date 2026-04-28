@@ -8,7 +8,7 @@ interface Props {
 export function AmountDisplay({ kobo, className = '' }: Props) {
   return (
     <span
-      className={`font-syne tabular-nums ${className}`}
+      className={`font-display tabular-nums ${className}`}
       style={{ fontVariantNumeric: 'tabular-nums' }}
     >
       {formatKobo(kobo)}

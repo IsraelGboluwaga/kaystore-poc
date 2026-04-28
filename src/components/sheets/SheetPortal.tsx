@@ -54,7 +54,7 @@ export function SheetPortal({ onClose, children, title }: Props) {
 
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border shrink-0">
-          <h2 className="text-[17px] font-semibold text-tx font-dm">{title}</h2>
+          <h2 className="text-[17px] font-semibold text-tx font-sans">{title}</h2>
           <button
             onClick={handleClose}
             className="w-8 h-8 flex items-center justify-center rounded-full text-tx-2 hover:bg-surface-2 transition-colors duration-120"

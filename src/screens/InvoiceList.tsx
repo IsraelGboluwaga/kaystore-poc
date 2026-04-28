@@ -32,7 +32,7 @@ export function InvoiceList() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by client or invoice number…"
-          className="w-full h-12 px-4 rounded-input bg-surface text-tx text-[15px] font-dm border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors shadow-card"
+          className="w-full h-12 px-4 rounded-input bg-surface text-tx text-[15px] font-sans border border-border focus:border-amber-border focus:bg-amber-bg outline-none transition-colors shadow-card"
         />
 
         <div className="bg-surface rounded-card shadow-card overflow-hidden">
@@ -53,8 +53,8 @@ export function InvoiceList() {
               >
                 <Avatar name={client.name} color={client.avatarColor} size={38} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-[15px] font-semibold text-tx font-dm truncate">{client.name}</p>
-                  <p className="text-[12px] text-tx-2 font-dm">{invoice.invoiceNumber} · {invoice.date}</p>
+                  <p className="text-[15px] font-semibold text-tx font-sans truncate">{client.name}</p>
+                  <p className="text-[12px] text-tx-2 font-sans">{invoice.invoiceNumber} · {invoice.date}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1 shrink-0">
                   <Badge status={status} />
@@ -69,7 +69,7 @@ export function InvoiceList() {
             );
           })}
           {filtered.length === 0 && (
-            <p className="px-4 py-6 text-[14px] text-tx-2 font-dm text-center">
+            <p className="px-4 py-6 text-[14px] text-tx-2 font-sans text-center">
               No invoices match "{search}"
             </p>
           )}

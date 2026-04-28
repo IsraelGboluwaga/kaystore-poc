@@ -23,7 +23,7 @@ export function Topbar({ title, showBack = false }: Props) {
           </button>
         )}
       </div>
-      <h1 className="flex-1 text-center text-[16px] font-semibold text-tx font-dm">
+      <h1 className="flex-1 text-center text-[16px] font-semibold text-tx font-sans">
         {title}
       </h1>
       <div className="w-10" />
