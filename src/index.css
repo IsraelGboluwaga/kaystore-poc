@@ -15,8 +15,13 @@
     background-color: #EBE6DC;
   }
 
+  html {
+    min-height: 100dvh;
+    background-color: #EBE6DC;
+  }
+
   #root {
-    min-height: 100svh;
+    min-height: 100dvh;
   }
 }
 
